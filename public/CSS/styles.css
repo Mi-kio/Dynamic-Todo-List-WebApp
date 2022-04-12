@@ -63,7 +63,7 @@ html {
     border-radius: 50%;
     border-color: transparent;
     background-color: #A683E3;
-    color: #fff;
+    color: #fff !important;
     font-size: 30px;
     padding-bottom: 6px;
     border-width: 0;
