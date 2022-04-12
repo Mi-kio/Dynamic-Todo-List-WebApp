@@ -2,8 +2,8 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const app = express();
-var items= ["Buy food","Cook food"];
-var workItems= ["Paper","Pen"];
+var items= [];
+var workItems= [];
 app.set("view engine","ejs");
 
 app.use(bodyparser.urlencoded({extended:true }));
@@ -25,15 +25,15 @@ app.get("/",function(req,res){
 
 app.post("/",function(req,res){
     let item = req.body.newItem;
+    console.log(req.body);
     if(req.body.list === "Work"){
          workItems.push(item);
+         res.redirect("/work");
     }
     else{
         items.push(item);
         res.redirect("/");
-    }
- 
-   
+    } 
 });
 
 
@@ -47,7 +47,7 @@ app.post("/work",function(req,res){
     console.log(req.body);
       let item = req.body.newItem;
       workItems.push(item);
-      res.redirect("/");
+      res.redirect("/work");
   });
 
 
