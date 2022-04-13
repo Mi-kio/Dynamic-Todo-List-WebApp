@@ -50,6 +50,10 @@ app.post("/work",function(req,res){
       res.redirect("/work");
   });
 
+  app.get("/about",function(req,res){
+    res.send("I am Sakshi Jain. This is my first time using expressjs. I am loving this framework.");
+    })
+
 
 
 app.listen(3000,function(){
