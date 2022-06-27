@@ -2,24 +2,51 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const app = express();
-var items= [];
-var workItems= [];
+const mongoose = require("mongoose");
+// var items= [];
+// var workItems= [];
 app.set("view engine","ejs");
 
 app.use(bodyparser.urlencoded({extended:true }));
 app.use(express.static("public"));
+mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser:true});
+
+const itemsSchema = new mongoose.Schema({
+    name:String
+})
+
+const Item = mongoose.model("Item",itemsSchema);
+
+const listitem1 = new Item({
+    name:"Welcome"
+});
+const listitem2 = new Item({
+    name:"hit + button to add items"
+});
+const listitem3 = new Item({
+    name:"Dinner"
+});
+
+const defaultItems = [listitem1, listitem2, listitem3];
+
+Item.insertMany(defaultItems,function(err){
+    if(err)
+    console.log(err);
+    else
+    console.log("done");
+});
 
 app.get("/",function(req,res){
-    let today = new Date();
-   let currentDay = today.getDay();
-   let options={
-       weekday:"long",
-       month:"long",
-       day:"numeric"
-   };
-   let day = today.toLocaleDateString("en-US",options);
+//     let today = new Date();
+//    let currentDay = today.getDay();
+//    let options={
+//        weekday:"long",
+//        month:"long",
+//        day:"numeric"
+//    };
+//    let day = today.toLocaleDateString("en-US",options);
 
-   res.render("list", {listTitle:day, 
+   res.render("list", {listTitle:"Today", 
     newlistitems:items});
 });
 
