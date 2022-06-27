@@ -29,12 +29,7 @@ const listitem3 = new Item({
 
 const defaultItems = [listitem1, listitem2, listitem3];
 
-Item.insertMany(defaultItems,function(err){
-    if(err)
-    console.log(err);
-    else
-    console.log("done");
-});
+
 
 app.get("/",function(req,res){
 //     let today = new Date();
@@ -46,21 +41,46 @@ app.get("/",function(req,res){
 //    };
 //    let day = today.toLocaleDateString("en-US",options);
 
-   res.render("list", {listTitle:"Today", 
-    newlistitems:items});
+Item.find({},function(err,foundItems){
+    // console.log(foundItems);
+   
+    if(foundItems.length === 0){
+        Item.insertMany(defaultItems,function(err){
+            if(err)
+            console.log(err);
+            else
+            console.log("done");
+        });
+        res.redirect("/");
+    }
+    else{
+    res.render("list", {listTitle:"Today", 
+    newlistitems:foundItems});
+
+}
+});
+   
+
+
+   
 });
 
 app.post("/",function(req,res){
-    let item = req.body.newItem;
-    console.log(req.body);
-    if(req.body.list === "Work"){
-         workItems.push(item);
-         res.redirect("/work");
-    }
-    else{
-        items.push(item);
-        res.redirect("/");
-    } 
+    const itemName = req.body.newItem;
+  const item = new Item({
+    name:itemName
+  });
+  item.save();
+  res.redirect("/");
+    // console.log(req.body);
+    // if(req.body.list === "Work"){
+    //      workItems.push(foundItems);
+    //      res.redirect("/work");
+    // }
+    // else{
+    //     items.push(foundItems);
+    //     res.redirect("/");
+    // } 
 });
 
 
@@ -70,12 +90,25 @@ app.get("/work",function(req,res){
     newlistitems:workItems});
 });
 
+app.post("/delete",function(req,res){
+const checkedItemBody = req.body.checkbox;
+
+   Item.findByIdAndRemove(checkedItemBody,function(err){
+    if(!err)
+    console.log("deleted");
+   })  
+   res.redirect("/");
+
+  })
+
 app.post("/work",function(req,res){
     console.log(req.body);
       let item = req.body.newItem;
       workItems.push(item);
       res.redirect("/work");
   });
+
+  
 
   app.get("/about",function(req,res){
     res.send("I am Sakshi Jain. This is my first time using expressjs. I am loving this framework.");
