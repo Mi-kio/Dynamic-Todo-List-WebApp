@@ -1,6 +1,5 @@
 //jshint esversion:6
 
-
 const express = require("express");
 const bodyparser = require("body-parser");
 const app = express();
@@ -75,9 +74,6 @@ else{
 })
 });
 
-
-
-
 app.post("/",function(req,res){
     const itemName = req.body.newItem;
     const listName = req.body.list;
@@ -98,8 +94,6 @@ app.post("/",function(req,res){
   }
 });
 
-
-
 app.post("/delete",function(req,res){
 const checkedItemId = req.body.checkbox;
 const listName = req.body.listName;
@@ -118,8 +112,6 @@ if (listName === "Today") {
       }
     });
   }
-
-
   })
 
  
