@@ -119,18 +119,21 @@ if (listName === "Today") {
     });
   }
 
-//    Item.findByIdAndRemove(checkedItemBody,function(err){
-//     if(!err)
-//     console.log("deleted");
-//    })  
-//    res.redirect("/");
 
   })
+
+ 
 
   app.get("/about",function(req,res){
     res.send("I am Sakshi Jain. This is my first time using expressjs. I am loving this framework.");
     })
 
-app.listen(3000,function(){
-    console.log("Server at post 3000");
+    let port = process.env.PORT;
+    if(port == null || port == ""){
+      port = 3000;
+    }
+    app.listen(port);
+
+app.listen(port,function(){
+    console.log("Server has started");
 });
