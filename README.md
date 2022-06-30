@@ -1,5 +1,8 @@
 # Todo-List-MERN
-A simple todo list with basic CRUD operations made using MERN
+
+[!screenshot](https://drive.google.com/file/d/1IqpfienwRjZwfU8AKu3JKLuNxRovmw79/view?usp=sharing)
+
+A todo list web application allows basic operations made using MERN
 
 Tech Stack
 - Nodejs
@@ -7,3 +10,7 @@ Tech Stack
 - EJS
 - HTML and CSS
 - Plain JS
+- MongoDB
+
+Deployed on
+-Heroku
