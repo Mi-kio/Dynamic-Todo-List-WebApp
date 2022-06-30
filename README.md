@@ -1,6 +1,6 @@
 # Todo-List-MERN
 
-![screenshot](https://drive.google.com/file/d/1IqpfienwRjZwfU8AKu3JKLuNxRovmw79/view?usp=sharing)
+![screenshot](https://github.com/Mi-kio/Todo-List-MERN/blob/main/Images/READEME%20purplee.PNG)
 
 A todo list web application allows basic operations made using MERN
 
